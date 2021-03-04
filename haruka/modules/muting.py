@@ -39,11 +39,11 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text(tld(chat.id, "You'll need to either give me a username to mute, or reply to someone to be muted."))
+        message.reply_text(tld(chat.id, "kasih username yang mau lu mute, oy. ato ga reply pesannya."))
         return ""
 
     if user_id == bot.id:
-        message.reply_text(tld(chat.id, "I'm not muting myself!"))
+        message.reply_text(tld(chat.id, "egk mau!"))
         return ""
 
     member = chatD.get_member(int(user_id))
@@ -51,10 +51,10 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
     if member:
 
         if user_id in SUDO_USERS:
-            message.reply_text(tld(chat.id, "No! I'm not muting bot sudoers! That would be a pretty dumb idea."))
+            message.reply_text(tld(chat.id, "wahai orang bloon, kenapa kau mau mute permaisuri dewa Lepi?"))
 
         elif is_user_admin(chatD, user_id, member=member):
-            message.reply_text(tld(chat.id, "No! I'm not muting chat administrator! That would be a pretty dumb idea."))
+            message.reply_text(tld(chat.id, "sorry, gua gabisa mute admin laen."))
 
         elif member.can_send_messages is None or member.can_send_messages:
             bot.restrict_chat_member(chatD.id, user_id, can_send_messages=False)
@@ -97,7 +97,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text(tld(chat.id, "You'll need to either give me a username to unmute, or reply to someone to be unmuted."))
+        message.reply_text(tld(chat.id, "siapa yang mau lu mute? kasih usernamenya atau reply chatnya."))
         return ""
 
     member = chatD.get_member(int(user_id))
@@ -105,7 +105,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
     if member.status != 'kicked' and member.status != 'left':
         if member.can_send_messages and member.can_send_media_messages \
                 and member.can_send_other_messages and member.can_add_web_page_previews:
-            message.reply_text(tld(chat.id, "This user already has the right to speak in {}.").format(chatD.title))
+            message.reply_text(tld(chat.id, "ok, dia udah gua bolehin ngecaper lagi di {}.").format(chatD.title))
         else:
             bot.restrict_chat_member(chatD.id, int(user_id),
                                      can_send_messages=True,
@@ -123,7 +123,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
                                                            mention_html(user.id, user.first_name),
                                                            mention_html(member.user.id, member.user.first_name), user_id)
     else:
-        message.reply_text(tld(chat.id, "This user isn't even in the chat, unmuting them won't make them talk more than they "
+        message.reply_text(tld(chat.id, "orangnya udah gaada di sini hihi "
                            "already do!"))
 
     return ""
@@ -151,28 +151,28 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text(tld(chat.id, "You don't seem to be referring to a user."))
+        message.reply_text(tld(chat.id, "tunjuk orangnya yang mau lu mute! reply /mute ke pesannya."))
         return ""
 
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text(tld(chat.id, "I can't seem to find this user"))
+            message.reply_text(tld(chat.id, "weh gua gabisa nemuin itu orang"))
             return ""
         else:
             raise
 
     if is_user_admin(chat, user_id, member):
-        message.reply_text(tld(chat.id, "I really wish I could mute admins..."))
+        message.reply_text(tld(chat.id, "hmmm pengennya si gua bisa ngemut dia, tttapi...dia admin"))
         return ""
 
     if user_id == bot.id:
-        message.reply_text(tld(chat.id, "I'm not gonna MUTE myself, are you crazy?"))
+        message.reply_text(tld(chat.id, "egk!"))
         return ""
 
     if not reason:
-        message.reply_text(tld(chat.id, "You haven't specified a time to mute this user for!"))
+        message.reply_text(tld(chat.id, "masukin format waktu yang bener!"))
         return ""
 
     split_reason = reason.split(None, 1)
@@ -214,7 +214,7 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
             LOGGER.warning(update)
             LOGGER.exception("ERROR muting user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text(tld(chat.id, "Well damn, I can't mute that user."))
+            message.reply_text(tld(chat.id, "sial, gua gabisa ngemut dia."))
 
     return ""
 
@@ -239,18 +239,18 @@ def nomedia(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text(tld(chat.id, "You'll need to either give me a username to restrict, or reply to someone to be restricted."))
+        message.reply_text(tld(chat.id, "kalo mo ngemut tu kasi usernamenya! reply chatnya kek."))
         return ""
 
     if user_id == bot.id:
-        message.reply_text(tld(chat.id, "I'm not restricting myself!"))
+        message.reply_text(tld(chat.id, "egk!"))
         return ""
 
     member = chatD.get_member(int(user_id))
 
     if member:
         if is_user_admin(chatD, user_id, member=member):
-            message.reply_text(tld(chat.id, "Afraid I can't restrict admins!"))
+            message.reply_text(tld(chat.id, "egk mau!"))
 
         elif member.can_send_messages is None or member.can_send_messages:
             bot.restrict_chat_member(chatD.id, user_id, can_send_messages=True,
@@ -269,9 +269,9 @@ def nomedia(bot: Bot, update: Update, args: List[str]) -> str:
                                               mention_html(member.user.id, member.user.first_name), user_id)
 
         else:
-            message.reply_text(tld(chat.id, "This user is already restricted in {}!"))
+            message.reply_text(tld(chat.id, "ok dia dh gua mute di {}!"))
     else:
-        message.reply_text(tld(chat.id, "This user isn't in the {}!").format(chatD.title))
+        message.reply_text(tld(chat.id, "dia gaada di {}!").format(chatD.title))
 
     return ""
 
@@ -296,7 +296,7 @@ def media(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text(tld(chat.id, "You'll need to either give me a username to unrestrict, or reply to someone to be unrestricted."))
+        message.reply_text(tld(chat.id, "kasih gua username ato reply ke chat orang yang mau gua mute."))
         return ""
 
     member = chatD.get_member(int(user_id))
@@ -322,7 +322,7 @@ def media(bot: Bot, update: Update, args: List[str]) -> str:
                                                            mention_html(user.id, user.first_name),
                                                            mention_html(member.user.id, member.user.first_name), user_id)
     else:
-        message.reply_text(tld(chat.id, "This user isn't even in the chat, unrestricting them won't make them send anything than they "
+        message.reply_text(tld(chat.id, "dia gaada di sini, buat apaan di mute "
                            "already do!"))
 
     return ""
@@ -350,28 +350,28 @@ def temp_nomedia(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text(tld(chat.id, "You don't seem to be referring to a user."))
+        message.reply_text(tld(chat.id, "gajelas, kasi username buat gua mute, gblk."))
         return ""
 
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text(tld(chat.id, "I can't seem to find this user"))
+            message.reply_text(tld(chat.id, "egk bisa emut dia."))
             return ""
         else:
             raise
 
     if is_user_admin(chat, user_id, member):
-        message.reply_text(tld(chat.id, "I really wish I could restrict admins..."))
+        message.reply_text(tld(chat.id, "pengennya gua ge ngemut dia, ttapi... dia admin"))
         return ""
 
     if user_id == bot.id:
-        message.reply_text(tld(chat.id, "I'm not gonna RESTRICT myself, are you crazy?"))
+        message.reply_text(tld(chat.id, "egk mau!"))
         return ""
 
     if not reason:
-        message.reply_text(tld(chat.id, "You haven't specified a time to restrict this user for!"))
+        message.reply_text(tld(chat.id, "masukin format waktu yang bener!"))
         return ""
 
     split_reason = reason.split(None, 1)
@@ -406,18 +406,18 @@ def temp_nomedia(bot: Bot, update: Update, args: List[str]) -> str:
             message.reply_text(tld(chat.id, "Restricted from sending media for {} in {}!").format(time_val, chatD.title))
             return log
         else:
-            message.reply_text(tld(chat.id, "This user is already restricted in {}.").format(chatD.title))
+            message.reply_text(tld(chat.id, "ok gua emut dia di {}.").format(chatD.title))
 
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
-            message.reply_text(tld(chat.id, "Restricted for {} in {}!").format(time_val, chatD.title), quote=False)
+            message.reply_text(tld(chat.id, "gua emut {} di {}!").format(time_val, chatD.title), quote=False)
             return log
         else:
             LOGGER.warning(update)
             LOGGER.exception("ERROR muting user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text(tld(chat.id, "Well damn, I can't restrict that user."))
+            message.reply_text(tld(chat.id, "anjimmm gabisa."))
 
     return ""
 
@@ -430,12 +430,12 @@ def muteme(bot: Bot, update: Update, args: List[str]) -> str:
     chat = update.effective_chat
     user = update.effective_user
     if is_user_admin(update.effective_chat, user_id):
-        update.effective_message.reply_text("I wish I could... but you're an admin.")
+        update.effective_message.reply_text("hahaha kalo bisa ge gua emut lu, tai.")
         return
 
     res = bot.restrict_chat_member(chat.id, user_id, can_send_messages=False)
     if res:
-        update.effective_message.reply_text("No problem, Muted!")
+        update.effective_message.reply_text("ok, D I E M!")
         log = "<b>{}:</b>" \
               "\n#MUTEME" \
               "\n<b>User:</b> {}" \
@@ -444,7 +444,7 @@ def muteme(bot: Bot, update: Update, args: List[str]) -> str:
         return log
 
     else:
-        update.effective_message.reply_text("Huh? I can't :/")
+        update.effective_message.reply_text("EH? KOK GABISAAAA :/")
 
 
 MUTE_HANDLER = DisableAbleCommandHandler("mute", mute, pass_args=True, admin_ok=True)
