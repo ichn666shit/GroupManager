@@ -171,22 +171,22 @@ def info(bot: Bot, update: Update, args: List[str]):
     text += tld(chat.id, "\nUser link: {}\n").format(mention_html(user.id, "link"))
 
     if user.id == OWNER_ID:
-        text += tld(chat.id, "\n\nAy, This guy is my owner. I would never do anything against him!")
+        text += tld(chat.id, "\n\nYooo, dewa Lepi. semua, harap beri hormat!")
     else:
         if user.id == int(254318997):
-            text += tld(chat.id, "\nThis person.... He is my god.")
+            text += tld(chat.id, "\nOrang ini.... dia tuan gua.")
 
         if user.id in SUDO_USERS:
-            text += tld(chat.id, "\nThis person is one of my sudo users! " \
-            "Nearly as powerful as my owner - so watch it.")
+            text += tld(chat.id, "\nanak didik dewa lepi! " \
+            "walaupun anak buah, dia tetap bisa apa aja, tiati.")
         else:
             if user.id in SUPPORT_USERS:
-                text += tld(chat.id, "\nThis person is one of my support users! " \
-                        "Not quite a sudo user, but can still gban you off the map.")
+                text += tld(chat.id, "\ntangan kanan dewa! " \
+                        "dia bisa membumihanguskan lu dari grup.")
 
             if user.id in WHITELIST_USERS:
-                text += tld(chat.id, "\nThis person has been whitelisted! " \
-                        "That means I'm not allowed to ban/kick them.")
+                text += tld(chat.id, "\norang beruntung yang dilindungi dewa! " \
+                        "gua gabisa ngekick, mute, ato ngeban dia.")
 
     for mod in USER_INFO:
         mod_info = mod.__user_info__(user.id, chat.id).strip()
