@@ -24,7 +24,7 @@ PM_START = """Hello {}, gua {}
 
 gua bot buat bantu lu ngatur grup.
 
-ini manusia ni yang bikin gua, [Lepi👩‍🎤](t.me/lepuyyy)
+ini manusia ni yang bikin gua, [🙈](t.me/lepuyyy)
 
 klik /help atau tombol Help di bawah buat tau kegunaan gua.
 
@@ -132,7 +132,7 @@ def start(bot: Bot, update: Update, args: List[str]):
         else:
             send_start(bot, update)
     else:
-        update.effective_message.reply_text("I'm alive")
+        update.effective_message.reply_text("naon sia?")
 
 def send_start(bot, update):
     #Try to remove old message
@@ -146,8 +146,8 @@ def send_start(bot, update):
     first_name = update.effective_user.first_name 
     text = PM_START
 
-    keyboard = [[InlineKeyboardButton(text="Bahasa", callback_data="set_lang_")]]
-    keyboard += [[InlineKeyboardButton(text="🛠 Reporting", callback_data="cntrl_panel_M"), 
+    keyboard = [[InlineKeyboardButton(text="ganti bahasa", callback_data="set_lang_")]]
+    keyboard += [[InlineKeyboardButton(text="Reporting", callback_data="cntrl_panel_M"), 
         InlineKeyboardButton(text="❔ Help", callback_data="help_back")]]
 
     update.effective_message.reply_text(PM_START.format(escape_markdown(first_name), bot.first_name), reply_markup=InlineKeyboardMarkup(keyboard), disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN)
@@ -179,7 +179,7 @@ def control_panel(bot, update):
 
         LOGGER.info(query.data)
     else:
-        M_match = "ThaNos is the best bot" #LMAO, don't uncomment
+        M_match = "lepi is the best guy" #LMAO, don't uncomment
 
     if M_match:
         text = "*Control panel* 🛠"
