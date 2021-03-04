@@ -85,17 +85,17 @@ def check_afk(bot, update, user_id, fst_name):
     if sql.is_afk(user_id):
         user = sql.check_afk_status(user_id)
         if not user.reason:
-            res = tld(chat.id, f"{fst_name} is AFK!")
+            res = tld(chat.id, f"{fst_name} mo kemana? kok afk?!")
         else:
-            res = tld(chat.id, f"{fst_name} is AFK! says its because of:\n{user.reason}")
+            res = tld(chat.id, f"{fst_name} dia afk, katanya si mau \n{user.reason}")
         update.effective_message.reply_text(res)
 
 
 __help__ = """
- - /afk <reason>: mark yourself as AFK.
- - brb <reason>: same as the afk command - but not a command.
+ - /afk <alasan>: biar orang yang tag lu tau kalo lu lagi afk.
+ - brb <alasan>: sama tapi beda kek afk.
 
-When marked as AFK, any mentions will be replied to with a message to say that you're not available!
+pas lu AFK, kalo ada yang reply atau nge-tag lu bakal dikasih tau sama bot kalo lu lagu afk.
 """
 
 __mod_name__ = "AFK"
