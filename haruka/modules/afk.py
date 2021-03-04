@@ -27,7 +27,7 @@ def afk(bot: Bot, update: Update):
 
     sql.set_afk(update.effective_user.id, reason)
     fname = update.effective_user.first_name
-    update.effective_message.reply_text(tld(chat.id, f"{fname} is now AFK!"))
+    update.effective_message.reply_text(tld(chat.id, f"{fname} bye, cabut lu!"))
 
 
 @run_async
@@ -85,7 +85,7 @@ def check_afk(bot, update, user_id, fst_name):
     if sql.is_afk(user_id):
         user = sql.check_afk_status(user_id)
         if not user.reason:
-            res = tld(chat.id, f"{fst_name} mo kemana? kok afk?!")
+            res = tld(chat.id, f"{fst_name} dia lagi afk")
         else:
             res = tld(chat.id, f"{fst_name} dia afk, katanya si mau \n{user.reason}")
         update.effective_message.reply_text(res)
