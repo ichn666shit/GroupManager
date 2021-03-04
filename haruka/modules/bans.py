@@ -30,24 +30,24 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text(tld(chat.id, "You don't seem to be referring to a user."))
+        message.reply_text(tld(chat.id, "yang mana orangnya?! reply chatnya! kasih username kek."))
         return ""
 
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text(tld(chat.id, "I can't seem to find this user"))
+            message.reply_text(tld(chat.id, "hmmm orangnya ga ketemu"))
             return ""
         else:
             raise
 
     if user_id == bot.id:
-        message.reply_text(tld(chat.id, "I'm not gonna BAN myself, are you crazy?"))
+        message.reply_text(tld(chat.id, "yakali gua ban diri sendiri wkwk."))
         return ""
 
     if is_user_ban_protected(chat, user_id, member):
-        message.reply_text(tld(chat.id, "Why would I ban an admin? That sounds like a pretty dumb idea."))
+        message.reply_text(tld(chat.id, "yakali nyuruh gua ngeban admin laen wkwk ogah."))
         return ""
 
     log = "<b>{}:</b>" \
