@@ -28,7 +28,7 @@ ini manusia ni yang bikin gua, [Lepi👩‍🎤](t.me/lepuyyy)
 
 klik /help atau tombol Help di bawah buat tau kegunaan gua.
 
-tambahin gua ke grup lu > [klik](http://t.me/tg_GroupManagerBot?startgroup=true).
+tambahin gua ke grup lu > [klik](http://t.me/uyeefamigliabot?startgroup=true).
 """
 
 
