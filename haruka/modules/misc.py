@@ -177,8 +177,8 @@ def info(bot: Bot, update: Update, args: List[str]):
             text += tld(chat.id, "\nOrang ini.... dia tuan gua.")
 
         if user.id in SUDO_USERS:
-            text += tld(chat.id, "\nanak didik dewa lepi! " \
-            "walaupun anak buah, dia tetap bisa apa aja, tiati.")
+            text += tld(chat.id, "\nPermaisuri dewa Lepi! " \
+            "pengendali segalanya, tiati.")
         else:
             if user.id in SUPPORT_USERS:
                 text += tld(chat.id, "\ntangan kanan dewa! " \
