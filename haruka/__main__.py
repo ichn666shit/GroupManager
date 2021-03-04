@@ -24,7 +24,7 @@ PM_START = """Hello {}, gua {}
 
 gua bot buat bantu lu ngatur grup.
 
-ini manusia ni yang bikin gua, [ORANG GANTENG](1697701725)
+ini manusia ni yang bikin gua, [ORANG GANTENG](t.me/itslepi)
 
 klik /help atau tombol Help di bawah buat tau kegunaan gua.
 
